@@ -1,0 +1,517 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colors */
+  --color-primary: #1A1A1A;
+  --color-secondary: #4A4A4A;
+  --color-accent: #6B46C1;
+  --color-accent-light: #8e44ad;
+  --color-bg: #F5F3EF;
+  --color-bg-white: #FFFFFF;
+  --color-footer-bg: #1A1A1A;
+  --color-footer-text: #F5F3EF;
+  --color-muted: #8A8A8A;
+  --color-border: rgba(26, 26, 26, 0.08);
+
+  /* Gradients for 3D effect */
+  --gradient-start: #3498db;
+  --gradient-mid: #8e44ad;
+  --gradient-end: #e74c3c;
+
+  /* 3D Effect */
+  --progress: 0;
+  --bg-color: #3498db;
+  --bg-gradient: linear-gradient(135deg, #3498db, #2980b9);
+
+  /* Spacing */
+  --section-padding: 120px;
+  --content-max-width: 1200px;
+  --page-padding: 48px;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-chinese: 'Inter', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-arabic: 'Inter', 'Noto Sans Arabic', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: var(--color-secondary);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* RTL Support */
+[dir="rtl"] body {
+  text-align: right;
+}
+
+/* Font families per language */
+body.lang-zh {
+  font-family: var(--font-chinese);
+}
+
+body.lang-ar {
+  font-family: var(--font-arabic);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(36px, 4vw, 48px);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: clamp(24px, 2.5vw, 32px);
+  line-height: 1.3;
+}
+
+/* Overline labels */
+.overline {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Navigation links */
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* CTA Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 36px;
+  border-radius: 30px;
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 48px;
+  border-radius: 30px;
+  border: none;
+  background: #FFFFFF;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-accent:hover {
+  background: var(--color-bg);
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Text link with underline animation */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+}
+
+.text-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.text-link:hover::after {
+  width: 100%;
+}
+
+/* Section styles */
+.section {
+  padding: var(--section-padding) var(--page-padding);
+}
+
+.section-alt {
+  background-color: var(--color-bg-white);
+}
+
+.section-dark {
+  background-color: var(--color-footer-bg);
+  color: var(--color-footer-text);
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3 {
+  color: var(--color-footer-text);
+}
+
+.content-wrapper {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.content-wrapper-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card styles */
+.card {
+  background: var(--color-bg);
+  padding: 48px 36px;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+}
+
+/* Image styles */
+.img-rounded {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.img-shadow {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Gallery hover overlay */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.02);
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.lang-link {
+  color: var(--color-primary);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  padding: 4px 0;
+}
+
+.lang-link:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.lang-link.active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom: 2px solid currentColor;
+}
+
+/* QR Code cards */
+.qr-card {
+  background: #FFFFFF;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.qr-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Testimonial carousel */
+.testimonial-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1.5;
+  color: var(--color-footer-text);
+}
+
+/* Dot indicators */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 243, 239, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: var(--color-footer-text);
+}
+
+/* 3D Hero Effect Styles */
+.stage-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  perspective: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.content-3d {
+  position: relative;
+  width: 25vw;
+  height: 25vh;
+  transform-style: preserve-3d;
+  display: grid;
+  place-items: center;
+}
+
+.face-3d {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-scroll-label {
+  position: absolute;
+  color: white;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Scroll container for 3D effect */
+.scroll-spacer {
+  height: 400vh;
+  position: relative;
+}
+
+/* Focus states for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Ensure animated elements are visible before GSAP kicks in */
+.animate-in,
+.gallery-item,
+.founder-image,
+.about-image,
+.service-card,
+.service-detail-card,
+.value-card,
+.contact-card {
+  opacity: 1;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .stage-3d {
+    display: none;
+  }
+
+  .scroll-spacer {
+    height: 100vh;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 1023px) {
+  :root {
+    --section-padding: 80px;
+    --page-padding: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-padding: 60px;
+    --page-padding: 20px;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  .card {
+    padding: 32px 24px;
+  }
+
+  .content-3d {
+    width: 50vw;
+    height: 20vh;
+  }
+}
